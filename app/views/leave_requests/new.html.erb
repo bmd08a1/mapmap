@@ -1,7 +1,6 @@
 <h1>New Requests</h1>
 
-<%= form_tag({controller: "leave_requests", action: "submit"}, method: "post") do %>
-  <%= hidden_field_tag(:leave_request_id, @leave_request_id) %>
+<%= form_tag(submit_leave_request_path(id: @leave_request_id), method: "post") do %>
   <p>Employee:
     <%= select_tag(:employee_id, options_from_collection_for_select(@employees, :id, :name)) %>
   </p>
@@ -9,7 +8,7 @@
     <%= select_tag(:category_id, options_from_collection_for_select(@categories, :id, :name)) %>
   </p>
   <p>Duration:
-    <input type='text' name='duration'/>
+    <input type='text' class='duration' />
   </p>
 
   <%= submit_tag("Submit", class: "btn btn-primary") %>
@@ -18,10 +17,22 @@
 
 <script>
   $(function() {
-    $('input[name="duration"]').daterangepicker({
+    $('input.duration').daterangepicker({
       "locale": {
         "format": "DD/MM/YYYY"
       }
+    }, function(start, end, label) {
+      $.ajax(
+        {
+          'url': '<%= escape_javascript(change_duration_leave_request_url(id: @leave_request_id)) %>',
+          'data': {
+            'start': start.format('DD/MM/YYYY'),
+            'end': end.format('DD/MM/YYYY'),
+            'authenticity_token': '<%= form_authenticity_token %>'
+          },
+          'method': 'POST'
+        }
+      )
     });
   });
 </script>

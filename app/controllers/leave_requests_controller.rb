@@ -11,4 +11,7 @@ class LeaveRequestsController < ApplicationController
 
   def submit
   end
+
+  def change_duration
+  end
 end

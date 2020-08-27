@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   root 'leave_requests#index'
 
   resources :leave_requests, only: [:index, :new] do
-    collection do
+    member do
       post :submit, to: 'leave_requests#submit'
+      post :change_duration
     end
   end
 end
