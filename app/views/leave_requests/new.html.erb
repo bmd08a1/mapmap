@@ -1,6 +1,7 @@
 <h1>New Requests</h1>
 
-<%= form_tag(submit_leave_request_path(id: @leave_request_id), method: "post") do %>
+<%= form_tag(submit_leave_requests_path, method: "post") do %>
+  <%= hidden_field_tag(:leave_request_id, @leave_request_id) %>
   <p>Employee:
     <%= select_tag(:employee_id, options_from_collection_for_select(@employees, :id, :name)) %>
   </p>
