@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :leave_requests, only: [:index, :new] do
     collection do
-      post :submit
+      post :submit, to: 'leave_requests#submit'
     end
   end
 end

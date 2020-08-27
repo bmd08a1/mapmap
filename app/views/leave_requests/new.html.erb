@@ -8,7 +8,20 @@
   <p>Category:
     <%= select_tag(:category_id, options_from_collection_for_select(@categories, :id, :name)) %>
   </p>
+  <p>Duration:
+    <input type='text' name='duration'/>
+  </p>
 
   <%= submit_tag("Submit", class: "btn btn-primary") %>
   <%= link_to 'Back', leave_requests_path, class: "btn btn-default" %>
 <% end %>
+
+<script>
+  $(function() {
+    $('input[name="duration"]').daterangepicker({
+      "locale": {
+        "format": "DD/MM/YYYY"
+      }
+    });
+  });
+</script>
