@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   #
   root 'leave_requests#index'
 
-  resources :leave_requests, only: [:index]
+  resources :leave_requests, only: [:index, :new] do
+    collection do
+      post :submit
+    end
+  end
 end
