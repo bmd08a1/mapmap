@@ -1,5 +1,5 @@
 module Leaves
-  class Date
+  class Date < ApplicationRecord
     self.table_name = 'leave_dates'
   end
 end

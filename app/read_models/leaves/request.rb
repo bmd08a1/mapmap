@@ -1,5 +1,5 @@
 module Leaves
-  class Request
+  class Request < ApplicationRecord
     self.table_name = 'leave_requests'
   end
 end
