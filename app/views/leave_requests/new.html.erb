@@ -9,7 +9,7 @@
     <%= select_tag(:category_id, options_from_collection_for_select(@categories, :id, :name)) %>
   </p>
   <p>Duration:
-    <input type='text' class='duration' />
+    <input type='text' name='duration' class='duration' />
   </p>
 
   <%= submit_tag("Submit", class: "btn btn-primary") %>
@@ -31,7 +31,10 @@
             'to': end.format('DD/MM/YYYY'),
             'authenticity_token': '<%= form_authenticity_token %>'
           },
-          'method': 'POST'
+          'method': 'POST',
+          'success': function(data) {
+            console.log(data)
+          }
         }
       )
     });

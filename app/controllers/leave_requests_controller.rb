@@ -13,6 +13,9 @@ class LeaveRequestsController < ApplicationController
   end
 
   def change_duration
+    duration = Leave::Duration.new(from: params[:from], to: params[:to])
+    new_dates = Leave::DatesGenerator.new(duration: duration).call
 
+    render json: new_dates
   end
 end
