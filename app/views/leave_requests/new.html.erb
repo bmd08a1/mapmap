@@ -27,8 +27,8 @@
         {
           'url': '<%= escape_javascript(change_duration_leave_request_url(id: @leave_request_id)) %>',
           'data': {
-            'start': start.format('DD/MM/YYYY'),
-            'end': end.format('DD/MM/YYYY'),
+            'from': start.format('DD/MM/YYYY'),
+            'to': end.format('DD/MM/YYYY'),
             'authenticity_token': '<%= form_authenticity_token %>'
           },
           'method': 'POST'
