@@ -11,6 +11,11 @@
   <p>Duration:
     <input type='text' name='duration' class='duration' />
   </p>
+  <div style='display: none' class='leave_dates'>
+    <p>Dates:</p>
+    <div class='leave_dates_list' style='margin: 0 0 15px 15px'>
+    </div>
+  </div>
 
   <%= submit_tag("Submit", class: "btn btn-primary") %>
   <%= link_to 'Back', leave_requests_path, class: "btn btn-default" %>
@@ -33,7 +38,23 @@
           },
           'method': 'POST',
           'success': function(data) {
-            console.log(data)
+            $('.leave_dates').show()
+            $('.leave_dates_list').empty()
+            data.forEach(function(leave_date) {
+              dateInput = document.createElement('input')
+              dateInput.value = leave_date['date']
+              dateInput.name = 'leave_dates[][date]'
+              dateInput.type = 'text'
+              dateInput.style = 'pointer-events:none'
+              hoursInput = document.createElement('input')
+              hoursInput.value = leave_date['hours']
+              hoursInput.name = 'leave_dates[][hours]'
+              hoursInput.type = 'number'
+              hoursInput.step = 0.1
+              newItem = document.createElement('div')
+              newItem.append(dateInput, ": ", hoursInput, " hours")
+              $('.leave_dates_list').append(newItem)
+            })
           }
         }
       )
