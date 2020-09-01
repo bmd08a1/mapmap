@@ -1,13 +1,12 @@
 module Leave
-  class Duration < Struct.new(:from, :to)
-    def initialize(from:, to:)
-      from_date = ::Date.parse(from)
-      to_date = ::Date.parse(to)
-      raise ArgumentError if to_date < from_date
+  class Duration < Dry::Struct
+    attribute :from, Types::Params::Date
+    attribute :to, Types::Params::Date
 
-      super(from_date, to_date)
-    rescue Date::Error
-      raise ArgumentError
+    def initialize(from:, to:)
+      raise ArgumentError if to < from
+
+      super(from: from, to: to)
     end
 
     def each_date
@@ -15,6 +14,11 @@ module Leave
       (from..to).each do |date|
         yield date
       end
+    end
+
+    def self.from_range(date_range:)
+      from, to = date_range.split(' - ')
+      new(from: from, to: to)
     end
   end
 end

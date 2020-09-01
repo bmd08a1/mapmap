@@ -1,16 +1,15 @@
 module Leave
-  class Date
+  class Date < Dry::Struct
     include Comparable
-    attr_reader :date, :units
-
-    def initialize(date, units)
-      @date = date
-      @units = units
-    end
+    attribute :date, Types::Params::Date
+    attribute :hours, Types::Strict::Float
 
     def <=>(other)
       self.date <=> other.date
     end
+
+    def to_h
+      { date: date, hours: hours }
+    end
   end
 end
-

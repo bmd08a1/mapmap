@@ -7,7 +7,7 @@ module Leave
     def call
       data = []
       @duration.each_date do |date|
-        data << { date: date.strftime('%d/%m/%Y'), hours: 8.0 }
+        data << Date.new(date: date, hours: 8.0).to_h
       end
 
       data
