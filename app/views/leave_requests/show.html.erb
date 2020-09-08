@@ -1,0 +1,30 @@
+<h1>Leave Request: <%= @request.id %></h1>
+<p>
+Employee: <%= @request.employee %><br/>
+Category: <%= @request.category %><br/>
+Status: <%= @request.status %><br/>
+Duration: <%= @request.duration.to_s %><br/>
+Total hours: <%= @request.total_hours.round(2) %><br/>
+</p>
+
+<h2>Leave Dates:</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Hours</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @dates.each do |date| %>
+    <tr>
+    <td><%= date.date.to_s(:dmy) %></td>
+    <td><%= date.hours.round(2) %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', leave_requests_path, class: "btn btn-default" %>
