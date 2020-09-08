@@ -12,13 +12,24 @@ module Leave
       @dates = []
     end
 
-    def submit(employee_id)
+    def submit(employee_id, category_id, duration, leave_dates)
       raise AlreadySubmitted if @status != :draft
-      apply RequestSubmitted.new(data: { request_id: @id, employee_id: employee_id })
+      apply RequestSubmitted.new(
+        data: {
+          request_id: @id,
+          employee_id: employee_id,
+          category_id: category_id,
+          duration: duration,
+          leave_dates: leave_dates
+        }
+      )
     end
 
     on RequestSubmitted do |event|
       @employee_id = event.data[:employee_id]
+      @category_id = event.data[:category_id]
+      @duration = event.data[:duration]
+      @dates = event.data[:leave_dates]
       @status = :pending
     end
   end

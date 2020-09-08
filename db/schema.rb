@@ -32,17 +32,21 @@ ActiveRecord::Schema.define(version: 2020_08_25_163424) do
   end
 
   create_table "leave_dates", force: :cascade do |t|
-    t.string "date"
-    t.string "units"
+    t.date "date"
+    t.float "hours"
     t.string "request_uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "leave_requests", force: :cascade do |t|
-    t.string "uuid"
+    t.string "uid"
     t.string "status"
     t.string "employee"
+    t.string "category"
+    t.date "from"
+    t.date "to"
+    t.float "total_hours"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
