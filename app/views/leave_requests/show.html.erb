@@ -20,7 +20,7 @@ Total hours: <%= @request.total_hours.round(2) %><br/>
   <tbody>
   <% @dates.each do |date| %>
     <tr>
-    <td><%= date.date %></td>
+    <td><%= date.date.to_s(:dmy) %></td>
     <td><%= date.hours.round(2) %></td>
   </tr>
 <% end %>

@@ -22,7 +22,7 @@ module Leave
     end
 
     def to_s
-      [from, to].join(' - ')
+      [from.to_s(:dmy), to.to_s(:dmy)].join(' - ')
     end
   end
 end
