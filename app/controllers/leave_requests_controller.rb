@@ -4,7 +4,8 @@ class LeaveRequestsController < ApplicationController
   end
 
   def show
-    render json: Leaves::Request.find_by(uid: params[:id])
+    @request = Leaves::Request.find_by(uid: params[:id])
+    @dates = Leaves::Date.where(request_uid: params[:id])
   end
 
   def new

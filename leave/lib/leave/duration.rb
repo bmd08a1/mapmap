@@ -20,5 +20,9 @@ module Leave
       from, to = date_range.split(' - ')
       new(from: from, to: to)
     end
+
+    def to_s
+      [from, to].join(' - ')
+    end
   end
 end

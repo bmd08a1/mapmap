@@ -1,4 +1,30 @@
 <h1>Leave Requests</h1>
 
+<h1>Orders</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Employee</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= link_to request.id, leave_request_path(request.uid) %></td>
+        <td><%= request.employee %></td>
+        <td><%= request.category %></td>
+        <td><%= request.status %></td>
+        <td><%= request.duration.to_s %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'New Leave Requests', new_leave_request_path, class: "btn btn-primary" %>
 
